@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="Style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+
+</head>
+<body>
+<header class="header">
+    <div class="container-header container">
+        <div class="menu">
+            <button class="infoButton">
+                <i class="far fa-question-circle" style="font-size: 30px"></i>
+            </button>
+        </div>
+
+        <div class="title">
+            Wordle
+        </div>
+
+        <div class="setting">
+            <button id = "status" class="infoButton">
+                <i class="fas fa-chart-bar" style="font-size: 30px"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="game container">
+    <div class="field">
+
+        <div class="field-row">
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+        </div>
+
+        <div class="field-row">
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+        </div>
+
+        <div class="field-row">
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+        </div>
+
+        <div class="field-row">
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+        </div>
+
+        <div class="field-row">
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+            <div class="tile">
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--<i class="fas fa-chart-bar"></i>-->
+<!--<i class="fas fa-cog"></i>-->
+<div class="container-cay-bord container">
+    <div id="keyboard">
+        <div row class="row">
+            <button data-key>q</button>
+            <button data-key>w</button>
+            <button data-key>e</button>
+            <button data-key>r</button>
+            <button data-key>t</button>
+            <button data-key>y</button>
+            <button data-key>u</button>
+            <button data-key>i</button>
+            <button data-key>o</button>
+            <button data-key>p</button>
+        </div>
+        <div row class="row">
+            <div class="spacer half"></div>
+            <button data-key>a</button>
+            <button data-key>s</button>
+            <button data-key>d</button>
+            <button data-key>f</button>
+            <button data-key>g</button>
+            <button data-key>h</button>
+            <button data-key>j</button>
+            <button data-key>k</button>
+            <button data-key>l</button>
+            <div class="spacer half"></div>
+        </div>
+        <div row class="row">
+            <button enter-key class="one-and-a-half">enter</button>
+            <button data-key>z</button>
+            <button data-key>x</button>
+            <button data-key>c</button>
+            <button data-key>v</button>
+            <button data-key>b</button>
+            <button data-key>n</button>
+            <button data-key>m</button>
+            <button back-key class="one-and-a-half">
+                <game-icon icon="backspace">back</game-icon>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="rule container">
+    <header>
+        <div class="titleRule">
+            How to play
+        </div>
+        <div class="iconRuleHeader">
+            <i class="fas fa-times" style="font-size: 20px"></i>
+        </div>
+
+    </header>
+    <div>
+        <p>
+            Guess the <strong>WORDLE</strong> in 6 tries.
+        </p>
+        <p>
+            Each guess must be a valid 5 letter word. Hit the enter button to submit.
+        </p>
+        <p>
+            After each guess, the color of the tiles will change to show how close your guess was to the word.
+        </p>
+    </div>
+
+    <div class="examples">
+        <div class="field-row">
+            <div class="tile" style="background-color: #6aaa64; color:#FFF">w</div>
+            <div class="tile">e</div>
+            <div class="tile">a</div>
+            <div class="tile">r</div>
+            <div class="tile">y</div>
+        </div>
+        <p>The letter <strong>W</strong> is in the word and in the correct spot.</p>
+        <div class="field-row">
+            <div class="tile">p</div>
+            <div class="tile">i</div>
+            <div class="tile">l</div>
+            <div class="tile" style="background-color: #c9b458; color: #FFF ">l</div>
+            <div class="tile">s</div>
+        </div>
+        <p>The letter <strong>I</strong> is in the word but in the wrong spot.</p>
+        <div class="field-row">
+            <div class="tile" >v</div>
+            <div class="tile">a</div>
+            <div class="tile">g</div>
+            <div class="tile" style="background-color: #696969; color:#FFF ">u</div>
+            <div class="tile">e</div>
+        </div>
+        <p>The letter <strong>U</strong> is not in the word in any spot.</p>
+    </div>
+    <p>A new WORDLE will be available each day!</p>
+</div>
+
+
+<body>
+<div id="popUp" class="popUp">
+    <div class="iconItem">
+        <div id="buttonOutPopup" class="iconItem"><i class="fas fa-times"></i></div>
+    </div>
+    <p>Statistic</p>
+    <div class="statisticList containerPopUp">
+        <div class="itemStatistic">
+            <div class="pointerValue">
+                22
+            </div>
+            <div class="nameStatistic">
+                Played
+            </div>
+        </div>
+
+        <div class="itemStatistic">
+            <div class="pointerValue">
+                100
+            </div>
+            <div class="nameStatistic">
+                Win%
+            </div>
+        </div>
+
+        <div class="itemStatistic">
+            <div class="pointerValue">
+                2
+            </div>
+            <div class="nameStatistic">
+                Current Streak
+            </div>
+        </div>
+
+        <div class="itemStatistic">
+            <div class="pointerValue">
+                2
+            </div>
+            <div class="nameStatistic">
+                Max Streak
+            </div>
+        </div>
+    </div>
+
+    <div class="containerPopUp">
+        <p>GUESS DISTRIBUTION</p>
+        <div class="containerStatisticWord">
+            <div class="itemStatistic">
+                <div>1</div>
+                <div class="evaluationStatistics">1</div>
+            </div>
+
+            <div class="itemStatistic">
+                <div>2</div>
+                <div class="evaluationStatistics">1</div>
+            </div>
+
+            <div class="itemStatistic">
+                <div>3</div>
+                <div class="evaluationStatistics">1</div>
+            </div>
+
+            <div class="itemStatistic">
+                <div>4</div>
+                <div class="evaluationStatistics">1</div>
+            </div>
+
+            <div class="itemStatistic">
+                <div>5</div>
+                <div class="evaluationStatistics">1</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="timerContainer" class="footerContainer">
+        <div class="item">
+            <p>NEXT WORDLE</p>
+            <div id ="clock" class="timer">
+                <span class="hours" >22</span>:
+                <span class="minutes">11</span>:
+                <span class="seconds">1</span>
+            </div>
+        </div>
+        <div class="share item">
+            <div id="shareButton" class="shareButton">
+                <div> SHARE <i class="fas fa-share-alt"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script src="dist/main.js"></script>
+</body>
+</html>
