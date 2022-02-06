@@ -14,9 +14,9 @@ let keyBord = new KeyBoard('button.enter-key', 'enter-key',
     backSpaceClicHandler, keyBoardClicHandler)
 
 let rule = new Rule();
-let statistic = new Statistic(() => aplication.getSharedResultMessage());
+let statistic = new Statistic(() => aplication.getSharedResultMessage(),() => aplication.getStatisticStates());
 
-aplication.addHeandlerForAllTickClock(statistic._initializeClock)
+aplication.addHeandlerForAllTickClock(statistic.initializeClock)
 aplication.addHandlerAfterTicketClock(statistic.hiddenTimer)
 aplication.addHandlerAfterTicketClock(()=> dashBoard.clearDasboard())
 aplication.addHandlerAfterTicketClock(() => keyBord.clearBacground())
@@ -29,7 +29,10 @@ let viewModel = {
     currentWord : '',
     statisticsSuchGame : {},
 };
+function StatisticHandler(){
 
+    return  aplication.getStatisticStates()
+}
 initUI();
 
 function enterClicHandler() {
@@ -95,27 +98,8 @@ function setBackgroundColorAndValueForDashBoard(rowIndex, cellIndex, letter, col
 }
 
 function setBackgroundColorForKeyBoard(letter, color){
-    let curentButtonColor = keyBord.getButtonColor(letter);
-    let priorityColor = getColorWithMorePriority(curentButtonColor, color)
+    let currentButtonColor = keyBord.getButtonColor(letter);
+    let priorityColor = aplication.getColorWithMorePriority(currentButtonColor, color)
     keyBord.setButtonColor(letter, priorityColor);
 }
 
-function getColorWithMorePriority(currentButtonColor, collor){
-    if(currentButtonColor == undefined){
-        return collor;
-    }
-
-    let currentColorOrderPriority;
-    let colorOrderPriority;
-
-    for(var key in evaluation) {
-        if(evaluation[key].color == currentButtonColor){
-            currentColorOrderPriority = evaluation[key].order
-        }
-        if(evaluation[key].color == collor){
-            colorOrderPriority = evaluation[key].order
-        }
-    }
-
-    return (currentColorOrderPriority < colorOrderPriority) ? currentButtonColor : collor;
-}

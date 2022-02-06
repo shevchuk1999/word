@@ -21,6 +21,19 @@ export default class Application {
             lastCompletedTs: null,
             restoringFromLocalStorage: null, // drop
         }
+
+        this.statesStatistic = {
+            rowsStatistic: {
+                0:{countWin: 0},
+                1:{countWin: 0},
+                2:{countWin: 0},
+                3:{countWin: 0},
+                4:{countWin: 0},},
+            loseGame: 0,
+            winGame: 0,
+            currentLine: 0,
+            bestLine: 0
+        }
         this._init();
     }
 
@@ -28,9 +41,15 @@ export default class Application {
         if (localStorage.getItem("gameState") == null) {
             this._prepareLocalStore(this._curentWordIdnex);
             localStorage.setItem("gameState", JSON.stringify(this.states))
+            localStorage.setItem("gameStatisticStates", JSON.stringify(this.statesStatistic))
         } else {
             this.states = JSON.parse(localStorage.getItem("gameState"));
             this._curentWordIdnex = this.states.boardState.length
+            
+        }
+
+        if(localStorage.getItem("gameStatisticStates") != null){
+            this.statesStatistic = JSON.parse(localStorage.getItem("gameStatisticStates"))
         }
 
         if(this.states.gameStatus != gameStatus.IN_PROGRESS){
@@ -139,16 +158,58 @@ export default class Application {
             if(this._isWin(word)){
                 this.states.gameStatus = gameStatus.WIN
                 this._clock.stratTimer(new Date(this.states.lastCompletedTs + LIFETIME_GAME))
+                this._setStatisticStateWenWin()
             }
             if(!this._isWin(word) && this.wordsAreFilled()){
                 this._clock.stratTimer(new Date(this.states.lastCompletedTs + LIFETIME_GAME))
                 this.states.gameStatus = gameStatus.FAIL
+                this.statesStatistic.loseGame += 1 ;
             }
             
             this.states.rowIndex += 1;
             localStorage.setItem('gameState', JSON.stringify(this.states))
+            localStorage.setItem('gameStatisticStates', JSON.stringify(this.statesStatistic))
             return result;
         }
+    }
+
+    _setStatisticStateWenWin(){
+        this.statesStatistic.rowsStatistic[this.states.rowIndex].countWin += 1
+        this.statesStatistic.winGame += 1
+        this.statesStatistic.currentLine = this.states.rowIndex + 1;
+        this._setBetterGame();
+    }
+
+    _setBetterGame(){
+        if(this.statesStatistic.bestLine > this.states.rowIndex+1){
+            this.statesStatistic.bestLine = this.states.rowIndex+1
+        }
+    }
+
+    getStatisticStates(){
+        let result = {
+            countGame : this.statesStatistic.loseGame + this.statesStatistic.winGame,
+            procentWinGame : (100 * this.statesStatistic.winGame / (this.statesStatistic.loseGame + this.statesStatistic.winGame)),
+            currentStreak : this.statesStatistic.currentLine,
+            maxStreak : this.statesStatistic.bestLine,
+            statisticRow : this._estimationStreak(this.statesStatistic.winGame)
+        }
+        return result
+    }
+
+    _estimationStreak(countGame){
+        let statisticRow = {
+            0:{ },
+            1:{ },
+            2:{ },
+            3:{ },
+            4:{ },
+        }
+        for (let i = 0; i < 5; i ++){
+            statisticRow[i].procent = (100 * this.statesStatistic.rowsStatistic[i].countWin / countGame)
+            statisticRow[i].countWin = (this.statesStatistic.rowsStatistic[i].countWin)
+        }
+        return statisticRow
     }
     
     getAllWordsWithEvaluation(){
@@ -181,7 +242,7 @@ export default class Application {
                 evaluations.push(evaluation.absent.value);
             }
         }
-        
+
         return evaluations;
     }
 
@@ -193,5 +254,24 @@ export default class Application {
         return this.states.solution[index] == letter;
     }
 
+     getColorWithMorePriority(currentButtonColor, collor){
+        if(currentButtonColor == undefined){
+            return collor;
+        }
+
+        let currentColorOrderPriority;
+        let colorOrderPriority;
+
+        for(var key in evaluation) {
+            if(evaluation[key].color == currentButtonColor){
+                currentColorOrderPriority = evaluation[key].order
+            }
+            if(evaluation[key].color == collor){
+                colorOrderPriority = evaluation[key].order
+            }
+        }
+
+        return (currentColorOrderPriority < colorOrderPriority) ? currentButtonColor : collor;
+    }
 
 }

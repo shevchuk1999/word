@@ -3,5 +3,6 @@ module.exports = {
     output: {
       filename: './main.js',
       library: 'myApp'
-    }
+    },
+    mode: 'development'
   };
