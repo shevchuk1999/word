@@ -9,14 +9,12 @@ import {evaluation, gameStatus} from './seting.js'
 let aplication = Application.build();
 let dashBoard = new DashBoard('div.field-row', 'div.tile');
 
-let keyBord = new KeyBoard('button.enter-key', 'enter-key',
-    'button.enter-key', enterClicHandler,
-    backSpaceClicHandler, keyBoardClicHandler)
+let keyBord = new KeyBoard(enterClicHandler, backSpaceClickHandler, keyBoardClickHandler)
 
 let rule = new Rule();
 let statistic = new Statistic(() => aplication.getSharedResultMessage(),() => aplication.getStatisticStates());
 
-aplication.addHeandlerForAllTickClock(statistic.initializeClock)
+aplication.addHandlerForAllTickClock(statistic.initializeClock)
 aplication.addHandlerAfterTicketClock(statistic.hiddenTimer)
 aplication.addHandlerAfterTicketClock(()=> dashBoard.clearDasboard())
 aplication.addHandlerAfterTicketClock(() => keyBord.clearBacground())
@@ -29,11 +27,9 @@ let viewModel = {
     currentWord : '',
     statisticsSuchGame : {},
 };
-function StatisticHandler(){
 
-    return  aplication.getStatisticStates()
-}
 initUI();
+initStatistic();
 
 function enterClicHandler() {
     if (viewModel.currentWord.length > 4) {
@@ -53,11 +49,11 @@ function enterClicHandler() {
     }
 }
 
-function backSpaceClicHandler(){
+function backSpaceClickHandler(){
     clearLastLetterFromCurrentWord();
 }
 
-function  keyBoardClicHandler(button){
+function  keyBoardClickHandler(button){
     addLetterInCurrentWord(button.innerHTML)
 }
 
@@ -69,6 +65,24 @@ function initUI(){
             setBackgroundColorForKeyBoard(letter,  evaluation[wordEvaluation.evaluations[cellIndex]].color)
         });
     });
+}
+
+function initStatistic(){
+    document.querySelector('#status')
+        .addEventListener('click', () => {
+            statistic.displayStatistics(aplication.getStatisticStates())
+        })
+
+    document.querySelector('#buttonOutPopup')
+        .addEventListener('click', () => {
+            statistic.hideStatistics()
+
+        })
+
+    document.querySelector('#shareButton')
+        .addEventListener('click', () => {
+            statistic.buffer(aplication.getSharedResultMessage())
+        })
 }
 
 function setBacgroudColorFromEvaluations(wordEvaluations){

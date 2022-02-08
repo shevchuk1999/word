@@ -14,12 +14,12 @@ export default class Application {
         this.states = {
             boardState: [],
             evaluations: [],
-            rowIndex: 0, // drop
+            rowIndex: 0,
             solution: null,
             gameStatus: gameStatus.IN_PROGRESS,
-            lastPlayedTs: null, // drop // how many time sing
+            lastPlayedTs: null,
             lastCompletedTs: null,
-            restoringFromLocalStorage: null, // drop
+            restoringFromLocalStorage: null,
         }
 
         this.statesStatistic = {
@@ -31,7 +31,7 @@ export default class Application {
                 4:{countWin: 0},},
             loseGame: 0,
             winGame: 0,
-            currentLine: 0,
+            currentLine: 6,
             bestLine: 0
         }
         this._init();
@@ -83,8 +83,8 @@ export default class Application {
         return aplication;
     }
 
-    addHeandlerForAllTickClock(func){
-        this._clock.addAllTickHeandler(func);
+    addHandlerForAllTickClock(func){
+        this._clock.addAllTickHandler(func);
     }
 
     addHandlerAfterTicketClock(func){
@@ -254,9 +254,9 @@ export default class Application {
         return this.states.solution[index] == letter;
     }
 
-     getColorWithMorePriority(currentButtonColor, collor){
+     getColorWithMorePriority(currentButtonColor, color){
         if(currentButtonColor == undefined){
-            return collor;
+            return color;
         }
 
         let currentColorOrderPriority;
@@ -266,12 +266,12 @@ export default class Application {
             if(evaluation[key].color == currentButtonColor){
                 currentColorOrderPriority = evaluation[key].order
             }
-            if(evaluation[key].color == collor){
+            if(evaluation[key].color == color){
                 colorOrderPriority = evaluation[key].order
             }
         }
 
-        return (currentColorOrderPriority < colorOrderPriority) ? currentButtonColor : collor;
+         return (currentColorOrderPriority < colorOrderPriority) ? currentButtonColor : color;
     }
 
 }

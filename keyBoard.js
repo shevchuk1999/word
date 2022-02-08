@@ -1,8 +1,5 @@
 export default class KeyBoard {
-    constructor(keySelector, enterSelector, backSpaceSelector,enterBoardHandler,backSpaceHandler,keyBoardHandler) {
-        this._keySelector = keySelector
-        this._enterSelector = enterSelector
-        this._backSpaceSelector = backSpaceSelector
+    constructor(enterBoardHandler,backSpaceHandler,keyBoardHandler) {
         this._enterBoardHandler = enterBoardHandler
         this._backSpaceHandler = backSpaceHandler
         this._keyBoardHandler = keyBoardHandler
@@ -37,7 +34,7 @@ export default class KeyBoard {
     }
 
     getButtonColor(charValue){
-        this._getButton(charValue).color;
+        return  this._getButton(charValue).color;
     }
 
     setButtonColor(value, color){

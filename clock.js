@@ -8,7 +8,7 @@ export default class Clock {
         this.executeAfterStopTimer = [];
     }
 
-    addAllTickHeandler(heandlers){
+    addAllTickHandler(heandlers){
         this.executeWithAllTick.push(heandlers);
     }
 
