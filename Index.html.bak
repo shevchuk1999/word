@@ -290,8 +290,8 @@
 </div>
 
 </body>
-<!--<script type="module" src="controller.js" defer></script>-->
+<script type="module" src="controller.js" defer></script>
 
-<script src="dist/main.js"></script>
+<!--<script src="dist/main.js"></script>-->
 </body>
 </html>

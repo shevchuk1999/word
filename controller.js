@@ -12,7 +12,7 @@ let dashBoard = new DashBoard('div.field-row', 'div.tile');
 let keyBord = new KeyBoard(enterClicHandler, backSpaceClickHandler, keyBoardClickHandler)
 
 let rule = new Rule();
-let statistic = new Statistic(() => aplication.getSharedResultMessage(),() => aplication.getStatisticStates());
+let statistic = new Statistic();
 
 aplication.addHandlerForAllTickClock(statistic.initializeClock)
 aplication.addHandlerAfterTicketClock(statistic.hiddenTimer)

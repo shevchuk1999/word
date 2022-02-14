@@ -1,5 +1,5 @@
 import WordApiClient from './apiClient.js'
-import {evaluation, gameStatus} from './seting.js'
+import {evaluation, gameStatus, statisticRow} from './seting.js'
 import Clock from './clock.js'
 
 const LIFETIME_GAME = 1000 * 60 * 1  // 5 MIN
@@ -23,16 +23,11 @@ export default class Application {
         }
 
         this.statesStatistic = {
-            rowsStatistic: {
-                0:{countWin: 0},
-                1:{countWin: 0},
-                2:{countWin: 0},
-                3:{countWin: 0},
-                4:{countWin: 0},},
+            rowsStatistic: statisticRow,
             loseGame: 0,
             winGame: 0,
             currentLine: 6,
-            bestLine: 0
+            bestLine: 6
         }
         this._init();
     }
@@ -198,16 +193,11 @@ export default class Application {
     }
 
     _estimationStreak(countGame){
-        let statisticRow = {
-            0:{ },
-            1:{ },
-            2:{ },
-            3:{ },
-            4:{ },
-        }
-        for (let i = 0; i < 5; i ++){
-            statisticRow[i].procent = (100 * this.statesStatistic.rowsStatistic[i].countWin / countGame)
-            statisticRow[i].countWin = (this.statesStatistic.rowsStatistic[i].countWin)
+
+        for (let key in statisticRow){
+            console.log(key)
+            statisticRow[key].procent = (100 * this.statesStatistic.rowsStatistic[key].countWin / countGame)
+            statisticRow[key].countWin = (this.statesStatistic.rowsStatistic[key].countWin)
         }
         return statisticRow
     }

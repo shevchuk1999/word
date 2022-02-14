@@ -9,4 +9,10 @@ export const gameStatus = {
     WIN: 1,
     FAIL: 2,
 }
-
+export let statisticRow = {
+    0:{ countWin: 0 },
+    1:{ countWin: 0 },
+    2:{ countWin: 0 },
+    3:{ countWin: 0 },
+    4:{ countWin: 0 },
+}

@@ -52,7 +52,7 @@ export default class Statistic{
 
     _renderDisplayStats(states){
         this.displayPlated.innerHTML = states.countGame;
-        this.displayWin.innerHTML = ( '' + states.procentWinGame).slice(1,4)
+        this.displayWin.innerHTML = ( '' + states.procentWinGame).slice(0,4)
         this.displayCurrentStreak.innerHTML = states.currentStreak
         this.displayMaxStreak.innerHTML = states.maxStreak
     }
